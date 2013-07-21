@@ -8,7 +8,12 @@ export LC_CTYPE=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
 
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+PATH=/opt/boxen/homebrew/bin:$PATH  # Add homebrew bin to PATH
+PATH=/opt/boxen/homebrew/Cellar/python/2.7.3-boxen2/share/python:$PATH  # Add python bin to path
+
 plugins=(git virtualenvwrapper git-flow ssh tmuxinator)
 source $ZSH/oh-my-zsh.sh
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+# If Boxen env exists source it
+[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
