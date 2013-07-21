@@ -18,11 +18,11 @@ chris_zsh_set_default_shell:
     - require:
       - pkg: chris_zsh_install
     - unless: "grep -E '^vagrant.+:/usr/bin/zsh$' /etc/passwd"
- 
+
 chris_zsh_theme:
-  file
-    - managed:
-    - name: "/home/vagrant/.oh-my-zsh/themes/chris.zsh-theme"
+  file:
+    - managed
+    - name: /home/vagrant/.oh-my-zsh/themes/chris.zsh-theme
     - user: vagrant
     - group: vagrant
     - source: 'salt://chris_zsh/files/chris.zsh-theme'

@@ -13,9 +13,8 @@ chris_zsh_install:
     - name: zsh
 
 chris_clone_oh_my_zsh:
-  git:
-    - latest
+  git.latest:
     - name: git://github.com/robbyrussell/oh-my-zsh.git
     - target: /home/vagrant/.oh-my-zsh
-    - require
+    - require:
       - pkg: chris_zsh_git_install
