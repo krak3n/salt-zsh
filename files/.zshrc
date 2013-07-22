@@ -17,3 +17,6 @@ source $ZSH/oh-my-zsh.sh
 
 # If Boxen env exists source it
 [ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
+
+# If ~/.autoenv/activate.sh exists source it
+[ -f $HOME/.autoenv/activate.sh ] && source $HOME/.autoenv/activate.sh
