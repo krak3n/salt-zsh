@@ -3,5 +3,5 @@
 #
 
 include:
-  - chris_zsh.install
-  - chris_zsh.config
+  - local_zsh.install
+  - local_zsh.config
