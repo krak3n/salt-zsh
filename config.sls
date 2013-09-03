@@ -1,8 +1,40 @@
+#!stateconf yaml . jinja
+
 #
 # ZSH Config
 #
 
-local_zsh_config:
+# Variables
+
+{% set directories = [
+  "zshrc.after.d",
+  "zshrc.before.d"
+] %}
+
+{% set before = [
+  "exports.zsh"
+] %}
+
+{% set after = [
+  "autoenv.zsh"
+] %}
+
+# Directories
+
+
+{% for directory in directories %}
+.{{ directory }}:
+  file:
+    - directory
+    - name: /home/vagrant/.{{ directory }}
+    - user: vagrant
+    - group: vagrant
+    - mode: 644
+{% endfor %}
+
+# Configuration Files
+
+.zshrc:
   file:
     - managed
     - name: /home/vagrant/.zshrc
@@ -10,16 +42,10 @@ local_zsh_config:
     - group: vagrant
     - mode: 755
     - source: salt://local_zsh/files/.zshrc
-
-local_zsh_set_default_shell:
-  cmd:
-    - run
-    - name: "chsh -s /usr/bin/zsh vagrant"
     - require:
-      - pkg: local_zsh_install
-    - unless: "grep -E '^vagrant.+:/usr/bin/zsh$' /etc/passwd"
+      - pkg: .install::zsh
 
-local_zsh_theme:
+.theme:
   file:
     - managed
     - name: /home/vagrant/.oh-my-zsh/themes/chris.zsh-theme
@@ -27,4 +53,34 @@ local_zsh_theme:
     - group: vagrant
     - source: 'salt://local_zsh/files/chris.zsh-theme'
     - require:
-      - git: local_clone_oh_my_zsh
+      - git: .install::oh_my_zsh
+
+# Before
+
+{% for file in before %}
+.{{ file }}:
+  file:
+    - managed
+    - name: /home/vagrant/.zshrc.before.d/{{ file }}
+    - source: salt://local_zsh/files/{{ file }}
+    - user: vagrant
+    - group: vagrant
+    - mode: 644
+    - require:
+      - file: .zshrc.before.d
+{% endfor %}
+
+# After
+
+{% for file in after %}
+.{{ file }}:
+  file:
+    - managed
+    - name: /home/vagrant/.zshrc.after.d/{{ file }}
+    - source: salt://local_zsh/files/{{ file }}
+    - user: vagrant
+    - group: vagrant
+    - mode: 644
+    - require:
+      - file: .zshrc.after.d
+{% endfor %}

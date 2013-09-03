@@ -1,22 +1,27 @@
-export ZSH=$HOME/.oh-my-zsh
-export ZSH_THEME="chris"
-export DISABLE_AUTO_TITLE=true
-export EDITOR=vim
+#
+# ZSH Configuration
+#
+# First load files from a ~/.zshrc.before.d directory then load files from
+# ~/.zshrc.after.d directory.
+#
 
-export LC_ALL=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LANGUAGE=en_US.UTF-8
+BEFORE_DIR="$HOME/.zshrc.before.d"
+AFTER_DIR="$HOME/.zshrc.after.d"
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-PATH=/opt/boxen/homebrew/bin:$PATH  # Add homebrew bin to PATH
-PATH=/opt/boxen/homebrew/Cellar/python/2.7.3-boxen2/share/python:$PATH  # Add python bin to path
+# Before - Usually Exports and Path additions
+if [ "$(ls -A $BEFORE_DIR)" ]; then
+    for f in $BEFORE_DIR/*; do
+        source $f;
+    done
+fi
 
-plugins=(git virtualenvwrapper git-flow ssh tmuxinator)
+# Oh-My-Zsh configuration
+plugins=(git git-flow virtualenvwrapper ssh tmuxinator)
 source $ZSH/oh-my-zsh.sh
 
-# If Boxen env exists source it
-[ -f /opt/boxen/env.sh ] && source /opt/boxen/env.sh
-
-# If ~/.autoenv/activate.sh exists source it
-[ -f $HOME/.autoenv/activate.sh ] && source $HOME/.autoenv/activate.sh
+# After Oh-My-Zsh has been sourced
+if [ "$(ls -A $AFTER_DIR)" ]; then
+    for f in $AFTER_DIR/*; do
+        source $f;
+    done
+fi
