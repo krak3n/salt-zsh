@@ -18,7 +18,7 @@
 
 # Clone oh-my-zsh
 
-oh_my_zsh:
+.oh_my_zsh:
   git.latest:
     - name: git://github.com/robbyrussell/oh-my-zsh.git
     - target: /home/vagrant/.oh-my-zsh
