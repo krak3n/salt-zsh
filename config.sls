@@ -65,7 +65,7 @@
     - source: salt://local_zsh/files/{{ file }}
     - user: vagrant
     - group: vagrant
-    - mode: 644
+    - mode: 755
     - require:
       - file: .zshrc.before.d
 {% endfor %}
@@ -80,7 +80,7 @@
     - source: salt://local_zsh/files/{{ file }}
     - user: vagrant
     - group: vagrant
-    - mode: 644
+    - mode: 755
     - require:
       - file: .zshrc.after.d
 {% endfor %}
