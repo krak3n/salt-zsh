@@ -29,7 +29,7 @@
     - name: /home/vagrant/.{{ directory }}
     - user: vagrant
     - group: vagrant
-    - mode: 644
+    - mode: 755
 {% endfor %}
 
 # Configuration Files
