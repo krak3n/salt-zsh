@@ -16,7 +16,7 @@ function virtualenv_prompt_info() {
     fi
 }
 
-PROMPT='%{$fg[cyan]%}%n%{$fg[yellow]%} > %{$reset_color%}%{$fg[blue]%}%~$(git_prompt_info)%{$reset_color%}$(virtualenv_prompt_info)
+PROMPT='%{$fg[cyan]%}%n%{$fg[yellow]%} at %{$reset_color%}%{$fg[blue]%}%~$(git_prompt_info)%{$reset_color%}$(virtualenv_prompt_info)
 %{$fg[yellow]%}↳%{$reset_color%} '
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%} on %{$reset_color%}%{$fg[yellow]%}"
