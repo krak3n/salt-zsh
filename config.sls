@@ -16,7 +16,8 @@
 ] %}
 
 {% set after = [
-  "autoenv.zsh"
+  "autoenv.zsh",
+  "aliases.zsh"
 ] %}
 
 # Directories
