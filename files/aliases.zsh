@@ -2,4 +2,4 @@
 # Aliases
 #
 
-alias rm='rm -I'
+alias rm='rm -i'
